@@ -1,14 +1,20 @@
 <?php
-    define("ROWS", 1);
-    define("START", 1);
-    define("COLS", 9);
+    $start = 2; $rows = 2; $cols = 4;
+    if (isset($_GET['start'])){
+        $start = $_GET['start'];
+        $rows = $_GET['rows'];
+        $cols = $_GET['cols'];
+    }
+    define("ROWS", $rows);
+    define("START", $start);
+    define("COLS", $cols);
 ?>
 <h1>Brad Big Company</h1>
 <hr />
 <form action="brad99.php">
-    Start: <input type="number" name="start" />
-    Rows: <input type="number" name="rows" />
-    Columns: <input type="number" name="cols" />
+    Start: <input type="number" name="start" value="<?php echo $start ?>"/>
+    Rows: <input type="number" name="rows" value="<?php echo $rows ?>" />
+    Columns: <input type="number" name="cols" value="<?php echo $cols ?>" />
     <input type="submit" value="Change" />
 </form>
 <table width='100%' border='1'>
