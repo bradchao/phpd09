@@ -1,10 +1,10 @@
 <?php
 include('bradapis.php');
 
-if (checkTWId('A123456789')){
-    echo 'OK';
-}else{
-    echo 'XX:';
-}
+echo createTWIdByArea('B') . '<br />';
+echo createTWIdByGender(false) . '<br />';
+echo createTWIdByRandom() . '<br />';
+echo createTWIdByBoth('K', true) . '<br />';
+echo createTWIdByGender() . '<br />';
 
 ?>

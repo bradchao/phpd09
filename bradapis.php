@@ -43,9 +43,15 @@
     function createTWIdByBoth($area, $isMale){
         $id = $area;
         $id .= $isMale?'1':'2';
+        for ($i=0; $i<7; $i++) $id .= rand(0,9);
 
-
-        
+        for ($i=0; $i<10; $i++){
+            if (checkTWId($id . $i)){
+                $id .= $i;
+                break;
+            }
+        }
+        return $id;
     }
 
 
