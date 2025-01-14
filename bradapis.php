@@ -54,7 +54,38 @@
         return $id;
     }
 
+    class Bike {
+        protected $speed;
 
+        function __construct(){
+            $this->speed = 0;
+        }
+
+        function upSpeed(){
+            $this->speed = $this->speed < 1 ? 1 : $this->speed*1.4;
+        }
+        function downSpeed(){
+            $this->speed = $this->speed < 1 ? 0 : $this->speed*0.7;
+        }
+        function getSpeed(){
+            return $this->speed;
+        }
+    }
+
+    class Scooter extends Bike {
+        private $gear;
+        function __construct($gear=0){
+            $this->gear = $gear;
+        }
+        function upSpeed(){
+            $this->speed = $this->speed < 1 ? 1 : $this->speed*1.8*$this->gear;
+        }
+        function changeGear($gear = 0){
+            if ($gear >= 0 && $gear <= 4){
+                $this->gear = $gear;
+            }
+        }
+    }
 
 
 
