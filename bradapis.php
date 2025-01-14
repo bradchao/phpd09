@@ -54,7 +54,7 @@
         return $id;
     }
 
-    class Bike {
+    class Bike extends Object{
         protected $speed;
 
         function __construct(){
