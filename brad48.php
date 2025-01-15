@@ -1,11 +1,46 @@
 <?php
+    $rpp = 10; // rows per page
+
     $mysqli = new mysqli('localhost','root','', 'brad');
     $mysqli->set_charset('utf8');
+
+    $sql = 'SELECT count(*) total FROM gift';
+    $result = $mysqli->query($sql);
+    $row = $result->fetch_object();
+    $total = $row->total;
+    $pages = ceil($total / $rpp);
+
+    $page = 1;
+
+    if (isset($_GET['page'])) $page = $_GET['page'];
+    $start = $rpp * ($page - 1);
+
+    $prev = $page == 1? 1: $page -1;
+    $next = $page == $pages? $page : $page + 1;
+
+    $key = "";
+    //$sql = 'SELECT id,name,feature,city,town FROM gift LIMIT ?, ?';
     $sql = 'SELECT id,name,feature,city,town FROM gift';
-    $stmt = $mysqli->prepare($sql);
+    if (isset($_GET['key']) && strlen($_GET['key'])> 0){
+        $key = $_GET['key'];
+        $skey = "%{$key}%";
+        $sql .= ' WHERE name LIKE ? OR feature LIKE ? OR city LIKE ? OR town LIKE ?';
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param('ssss', $skey,$skey,$skey,$skey);
+    }else{
+        $stmt = $mysqli->prepare($sql);
+    }
+    //$stmt->bind_param('ii', $start, $rpp);
 ?>
 <meta charset='UTF-8'>
 <h1>Brad Big Company</h1>
+<hr />
+<a href="?page=<?php echo $prev; ?>">Prev</a> | <a href="?page=<?php echo $next; ?>">Next</a>
+<hr />
+<form>
+    Keyword: <input name="key" value="<?php echo $key; ?>"/>
+    <input type="submit" value="Search" />
+</form>
 <hr />
 <?php
     if ($stmt->execute()){
