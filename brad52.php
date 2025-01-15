@@ -1,4 +1,7 @@
 <?php
+    include('bradapis.php');
+    session_start();
+
     if (isset($_POST['account'])){
         $account = $_POST['account']; $passwd = $_POST['passwd']; 
 
@@ -9,22 +12,30 @@
         $stmt = $mysqli->prepare($sql);
         $stmt->bind_param('s', $account);
         if ($stmt->execute()){
-            //$stmt->store_result();
+            $stmt->store_result();
             if ($stmt->num_rows() > 0){
                 $stmt->bind_result($id,$account,$hashPasswd,$realname,$icon,$icontype);
                 $stmt->fetch();
                 if (password_verify($passwd, $hashPasswd)){
+                    $member = new Member($id,$account,$realname,$icon,$icontype);
+                    $_SESSION['member'] = $member;
                     header('Location: brad48.php');
                 }else{
                     // Password ERROR
+                    echo 'debug1';
                 }
             }else{
                 // Account NOT EXIST
+                echo 'debug2';
             }
 
+        }else{
+            echo 'debug3';
         }
     
 
+    }else{
+        echo 'debug4';
     }
 ?>
 <meta charset="UTF-8" />

@@ -1,4 +1,11 @@
 <?php
+    include('bradapis.php');
+    session_start();
+
+    if (!isset($_SESSION['member'])) header('Location: brad50.html');
+
+    $member = $_SESSION['member'];
+
     $rpp = 10; // rows per page
 
     $mysqli = new mysqli('localhost','root','', 'brad');
@@ -34,6 +41,9 @@
 ?>
 <meta charset='UTF-8'>
 <h1>Brad Big Company</h1>
+<hr />
+<span>Hello, <?php echo $member->getRealname(); ?></span>
+<a href="logout.php">Logout</a>
 <hr />
 <a href="?page=<?php echo $prev; ?>">Prev</a> | <a href="?page=<?php echo $next; ?>">Next</a>
 <hr />

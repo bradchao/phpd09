@@ -54,7 +54,7 @@
         return $id;
     }
 
-    class Bike extends Object{
+    class Bike {
         protected $speed;
 
         function __construct(){
@@ -87,7 +87,24 @@
         }
     }
 
+    class Member {
+        private $id;
+        private $account, $realname, $icon, $icontype;
+        function __construct($id,$account, $realname, $icon, $icontype){
+            $this->id = $id;
+            $this->account = $account;
+            $this->realname = $realname;
+            $this->icon = $icon;
+            $this->icontype = $icontype;
+        }
+        function getId(){return $this->id;}
+        function getAccount(){return $this->account;}
+        function getRealname(){return $this->realname;}
+        function getIcon(){return $this->icon;}
+        function getIcontype(){return $this->icontype;}
 
+        function setRealname($realname){$this->realname=$realname;}
+    }
 
 
 
