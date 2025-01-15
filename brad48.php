@@ -42,7 +42,8 @@
 <meta charset='UTF-8'>
 <h1>Brad Big Company</h1>
 <hr />
-<span>Hello, <?php echo $member->getRealname(); ?></span>
+<span>Hello, <a href='brad56.php'><?php echo $member->getRealname(); ?></a></span>
+<div><img src='data:<?php echo $member->getIcontype(); ?>; base64,<?php echo base64_encode($member->getIcon()); ?>' /></div>
 <a href="logout.php">Logout</a>
 <hr />
 <a href="?page=<?php echo $prev; ?>">Prev</a> | <a href="?page=<?php echo $next; ?>">Next</a>
