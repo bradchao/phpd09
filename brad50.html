@@ -12,10 +12,13 @@
 <meta charset="UTF-8" />
 <h1>Register Page</h1>
 <hr />
-<form action="brad51.php" method="post" onsubmit="return checkForm();">
+<form action="brad51.php" method="post" 
+    enctype="multipart/form-data"
+    onsubmit="return checkForm();">
     Account: <input name="account" id="account" onblur="checkAccount()" />
     <span id="mesg"></span><br />
     Password: <input type="password" name="passwd" /><br />
     Realname: <input name="realname" /><br />
+    Icon: <input type="file" name="icon" /><br />
     <input type="submit" value="Register" />
 </form>
