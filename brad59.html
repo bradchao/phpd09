@@ -7,7 +7,9 @@
                 console.log(data);
                 if (data.error == 0){
                     $('#eid').html(data.eid);
+                    $('#ename').html(data.ename);
                     $('#cid').html(data.cid);
+                    $('#cname').html(data.cname);
                     $('#date').html(data.date);
 
                     $('#table').empty();
@@ -18,7 +20,7 @@
                             '<td>' + row.pname + '</td>' +
                             '<td>' + row.price + '</td>' +
                             '<td>' + row.qty + '</td>' +
-                            '<td>' + (row.price*row.qty) + '</td>' +
+                            '<td>' + row.sum + '</td>' +
                             '<tr>'
                         );
                     });
@@ -37,7 +39,7 @@
 Order ID: <input id="orderId" />
 <input type="button" onclick="search()" value="Search" />
 <hr />
-Employee ID: <span id="eid"></span><br />
-Customer ID: <span id="cid"></span><br />
+Employee ID: <span id="eid"></span> <span id="ename"></span><br />
+Customer ID: <span id="cid"></span> <span id="cname"></span><br />
 Order Date: <span id="date"></span><br />
 <table id="table" width="100%" border="1"></table>

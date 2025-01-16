@@ -36,10 +36,12 @@
         $orderId = $_REQUEST['orderId'];
         $mysqli = new mysqli('localhost','root','', 'brad');
         $mysqli->set_charset('utf8');
-        $sql = 'SELECT o.CustomerID, o.EmployeeID, o.OrderDate, p.ProductName, od.UnitPrice, od.Quantity
+        $sql = 'SELECT o.CustomerID, c.CompanyName, o.EmployeeID, e.LastName, o.OrderDate, p.ProductName, od.UnitPrice, od.Quantity, (od.UnitPrice * od.Quantity) sum
                 FROM orderdetails od
                 JOIN orders o ON (o.OrderID = od.OrderID)
                 JOIN products p ON (p.ProductID = od.ProductID)
+                JOIN employees e ON (e.EmployeeID = o.EmployeeID)
+                JOIN customers c ON (o.CustomerID = c.CustomerID)
                 WHERE od.OrderID = ?';
         $stmt = $mysqli->prepare($sql);
         $stmt->bind_param('i', $orderId);
@@ -51,15 +53,18 @@
                 $respont = ['error' => 3];
             }else{
                 $respont = ['error' => 0];
-                $stmt->bind_result($cid,$eid,$date,$pname,$price,$qty);
+                $stmt->bind_result($cid,$cname,$eid,$ename,$date,$pname,$price,$qty,$sum);
                 while ($stmt->fetch()){
                     $respont['cid'] = $cid;
+                    $respont['cname'] = $cname;
                     $respont['eid'] = $eid;
-                    $respont['date'] = $date;
+                    $respont['ename'] = $ename;
+                    $respont['date'] = substr($date,0 ,10) ;
                     $respont['detail'][] = [
                         'pname' => $pname,
                         'price' => $price,
-                        'qty' => $qty
+                        'qty' => $qty,
+                        'sum' => $sum,
                     ];
                 }
             }
