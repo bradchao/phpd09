@@ -17,6 +17,7 @@
                 $stmt->bind_result($id,$account,$hashPasswd,$realname,$icon,$icontype);
                 $stmt->fetch();
                 if (password_verify($passwd, $hashPasswd)){
+                    
                     $member = new Member($id,$account,$realname,$icon,$icontype);
                     $_SESSION['member'] = $member;
                     header('Location: brad48.php');

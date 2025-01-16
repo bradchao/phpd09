@@ -27,6 +27,7 @@
         }  
         
         if ($stmt->execute()){
+            
             header('Location: brad48.php');
         }else{
             echo "ERROR: {$mysqli->error}";
