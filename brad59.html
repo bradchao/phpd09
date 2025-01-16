@@ -1,0 +1,22 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function search(){
+        let url = 'brad60.php?orderId=' + $('#orderId').val();
+        $.get(url,function(data,status){
+            if (status == 'success'){
+                
+            }
+        });
+    }
+
+</script>
+<meta charset="UTF-8" />
+<h1>Brad Big Company</h1>
+<hr />
+Order ID: <input id="orderId" />
+<input type="button" onclick="search()" value="Search" />
+<hr />
+Employee ID: <span id="eid"></span><br />
+Customer ID: <span id="cid"></span><br />
+Order Date: <span id="date"></span><br />
+<table id="table" width="100%" border="1"></table>
