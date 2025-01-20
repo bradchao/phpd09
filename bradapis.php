@@ -1,5 +1,12 @@
 <?php
     define('LETTERS', 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
+
+    $mysqli = new mysqli('localhost','root','', 'brad');
+    $mysqli->set_charset('utf8');
+
+    // dsn data source name
+    $pdo = new PDO('mysql:host=localhost;dbname=brad;charset=utf8', 'root', '');
+
     function checkTWId($id){
         $isRight = false;
         $regex = '/^[A-Z][12][0-9]{8}$/';
