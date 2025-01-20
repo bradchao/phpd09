@@ -17,6 +17,12 @@ window.onload = function(){
 
     clear.addEventListener('click',function(event){
         ctx.clearRect(0,0,canvas.width, canvas.height);
+        if (isConnect){
+            var data = {
+                isClear : true
+            };
+            webSocket.send(JSON.stringify(data));
+        }
     });
 
     canvas.addEventListener('mousedown',function(event){
@@ -25,6 +31,15 @@ window.onload = function(){
         ctx.beginPath();
         ctx.lineWidth = 4;
         ctx.moveTo(x, y);
+
+        var data = {
+            isClear : false,
+            isNewLine : true,
+            x : x,
+            y : y
+        };
+        if (isConnect) webSocket.send(JSON.stringify(data));
+
     });
     canvas.addEventListener('mouseup',function(event){
         isDrag = false;
@@ -34,6 +49,16 @@ window.onload = function(){
             var x = event.offsetX, y = event.offsetY;
             ctx.lineTo(x, y);
             ctx.stroke();
+
+            var data = {
+                isClear : false,
+                isNewLine : false,
+                x : x,
+                y : y
+            };
+            if (isConnect) webSocket.send(JSON.stringify(data));            
+
+
         }
     });
 
